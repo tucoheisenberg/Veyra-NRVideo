@@ -526,6 +526,44 @@ DialogLayer {
                 onToggled: checked => veyra.ps5ControlSet("background", checked)
             }
         }
+        // 键鼠控制: the keyboard and mouse become a PS5 controller (merged with any pad).
+        VRow {
+            visible: captureDialog.pcOn
+            label: qsTr("键盘鼠标控制")
+            hint: qsTr("打开后点击画面开始：鼠标控制右摇杆，键位按键位文件；`键切换步行/驾驶键位，Ctrl+Alt+Shift+Z 释放")
+            VSwitch {
+                objectName: "capture-ps5-kbm"
+                checked: captureDialog.pc.kbm === true
+                onToggled: checked => veyra.ps5ControlSet("kbm", checked)
+            }
+        }
+        VRow {
+            visible: captureDialog.pcOn && captureDialog.pc.kbm === true
+            label: qsTr("鼠标灵敏度")
+            hint: qsTr("鼠标移动速度到右摇杆幅度的比例；反死区、曲线等在键位文件里调")
+            value: (captureDialog.pc.kbmSensitivity || 100) + "%"
+            VSlider {
+                objectName: "capture-ps5-kbm-sensitivity"
+                implicitWidth: 170
+                live: false
+                from: 10; to: 300; value: captureDialog.pc.kbmSensitivity || 100
+                resettable: true; defaultValue: 100
+                onMoved: value => veyra.ps5ControlSet("kbmSensitivity", Math.round(value))
+            }
+        }
+        VRow {
+            visible: captureDialog.pcOn && captureDialog.pc.kbm === true
+            label: qsTr("键位")
+            hint: captureDialog.pc.kbmCaptured === true
+                  ? (captureDialog.pc.kbmDriving === true ? qsTr("键鼠控制中 · 驾驶键位") : qsTr("键鼠控制中 · 步行键位"))
+                  : qsTr("默认参照 GTA 系列 PS 布局；修改后下次点击画面生效")
+            VButton {
+                objectName: "capture-ps5-kbm-mapping"
+                text: qsTr("编辑键位文件")
+                ghost: true
+                onClicked: veyra.ps5KbmOpenMapping()
+            }
+        }
         VRow {
             visible: captureDialog.pcOn
             label: qsTr("手柄")

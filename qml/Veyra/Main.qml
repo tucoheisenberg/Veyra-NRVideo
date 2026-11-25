@@ -741,6 +741,26 @@ Window {
             veyra.moonlightCapture(true)
         }
     }
+    // 键鼠控制 (PS5 手柄控制 on the capture card): a click on the picture hands the keyboard and
+    // mouse to the PS5 as a controller. While captured the clicks go to the PS5 and never get here.
+    TapHandler {
+        enabled: veyra.ps5Control.kbm === true && veyra.ps5Control.state === "connected"
+                 && veyra.ps5Control.kbmCaptured !== true && dialogs.dialog === ""
+        property bool pressOnCover: false
+        property bool pressOnPicture: false
+        onPressedChanged: if (pressed) {
+            pressOnCover = root.overVideoCover(point.scenePosition)
+            pressOnPicture = root.pictureContains(point.scenePosition)
+        }
+        onTapped: eventPoint => {
+            const p = eventPoint.position
+            if (pressOnCover || !pressOnPicture) return
+            if (root.page !== "min" && root.page !== "pro" && root.page !== "node" && !root.fullscreen) return
+            if (p.x < videoHost.x || p.y < videoHost.y || p.x > videoHost.x + videoHost.width
+                || p.y > videoHost.y + videoHost.height) return
+            veyra.ps5KbmCapture(true)
+        }
+    }
     // Stream statistics on and off. While a PC stream has the keyboard, the capture filter sees the keys
     // first and toggles the same switch.
     Shortcut {
