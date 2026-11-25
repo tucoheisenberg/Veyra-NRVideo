@@ -865,6 +865,11 @@ public:
     // key: enabled | background (saved preferences ps5CaptureControl / ps5ControlBackground).
     Q_INVOKABLE void ps5ControlSet(const QString& key, const QVariant& value);
     Q_INVOKABLE void ps5ControlRestart();
+    // 键鼠控制: start (click on the picture) or stop using the keyboard and mouse as
+    // the PS5 controller; open the mapping file (kbm-mapping.ini) in the editor.
+    // ps5ControlSet keys also: kbm (bool) | kbmSensitivity (percent 10-400).
+    Q_INVOKABLE void ps5KbmCapture(bool on);
+    Q_INVOKABLE void ps5KbmOpenMapping();
     QString remotePlayHost() const;
     void setRemotePlayHost(const QString& value);
     QString remotePlayPin() const;
