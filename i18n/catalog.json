@@ -326,6 +326,19 @@
    "ru": " • %1 ч"
   },
   {
+   "zh": " · Ctrl+Alt+Shift+Z 释放",
+   "src": "src/ui/bridge/RemotePlay.cpp",
+   "zh-TW": " · Ctrl+Alt+Shift+Z 釋放",
+   "en": " · Ctrl+Alt+Shift+Z to release",
+   "ja": " · Ctrl+Alt+Shift+Z で解除",
+   "ko": " · Ctrl+Alt+Shift+Z로 해제",
+   "es": " · Ctrl+Alt+Shift+Z para liberar",
+   "fr": " · Ctrl+Alt+Shift+Z pour libérer",
+   "de": " · Ctrl+Alt+Shift+Z zum Freigeben",
+   "pt-BR": " · Ctrl+Alt+Shift+Z para liberar",
+   "ru": " · Ctrl+Alt+Shift+Z — освободить"
+  },
+  {
    "zh": " · 下混",
    "src": "src/ui/bridge/Preferences.cpp",
    "zh-TW": " · 下混",
@@ -18072,6 +18085,19 @@
    "ru": "Выпущена клавиатура и мышь (нажмите на картинку, чтобы снова захватить)"
   },
   {
+   "zh": "已释放键盘鼠标 · 点击画面重新开始",
+   "src": "src/ui/bridge/RemotePlay.cpp",
+   "zh-TW": "已釋放鍵盤滑鼠 · 點擊畫面重新開始",
+   "en": "Keyboard and mouse released · click the picture to start again",
+   "ja": "キーボードとマウスを解除しました · 画面をクリックで再開",
+   "ko": "키보드와 마우스를 해제했습니다 · 화면을 클릭하면 다시 시작",
+   "es": "Teclado y ratón liberados · haz clic en la imagen para volver a empezar",
+   "fr": "Clavier et souris libérés · cliquez sur l'image pour recommencer",
+   "de": "Tastatur und Maus freigegeben · zum Fortsetzen auf das Bild klicken",
+   "pt-BR": "Teclado e mouse liberados · clique na imagem para recomeçar",
+   "ru": "Клавиатура и мышь освобождены · щёлкните по изображению, чтобы начать снова"
+  },
+  {
    "zh": "已锁定全屏 · Ctrl+L 解锁，Esc 退出全屏",
    "src": "qml/Main.qml",
    "zh-TW": "已鎖定全螢幕 · Ctrl+L 解鎖，Esc 退出全螢幕",
@@ -20631,6 +20657,19 @@
    "de": "Windows-Aufnahmeeinstellungen öffnen",
    "pt-BR": "Abrir configurações de gravação do Windows",
    "ru": "Открыть настройки записи Windows"
+  },
+  {
+   "zh": "打开后点击画面开始：鼠标控制右摇杆，键位按键位文件；`键切换步行/驾驶键位，Ctrl+Alt+Shift+Z 释放",
+   "src": "qml/CaptureSourceDialog.qml",
+   "zh-TW": "開啟後點擊畫面開始：滑鼠控制右搖桿，按鍵依鍵位檔案；`鍵切換步行/駕駛鍵位，Ctrl+Alt+Shift+Z 釋放",
+   "en": "When on, click the picture to start: the mouse drives the right stick, keys follow the mapping file; ` switches on-foot/driving keys, Ctrl+Alt+Shift+Z releases",
+   "ja": "オンにして画面をクリックすると開始：マウスで右スティック、キーはキー設定ファイルに従います。` で徒歩/運転のキー配置を切替、Ctrl+Alt+Shift+Z で解除",
+   "ko": "켠 뒤 화면을 클릭하면 시작: 마우스는 오른쪽 스틱, 키는 키 배치 파일을 따릅니다. ` 키로 도보/운전 배치 전환, Ctrl+Alt+Shift+Z로 해제",
+   "es": "Activado, haz clic en la imagen para empezar: el ratón mueve el stick derecho y las teclas siguen el archivo de asignación; ` cambia entre a pie/conducción, Ctrl+Alt+Shift+Z libera",
+   "fr": "Une fois activé, cliquez sur l'image pour commencer : la souris pilote le stick droit, les touches suivent le fichier d'affectation ; ` bascule à pied/conduite, Ctrl+Alt+Shift+Z libère",
+   "de": "Wenn aktiv, zum Start auf das Bild klicken: Die Maus steuert den rechten Stick, Tasten folgen der Belegungsdatei; ` wechselt zu Fuß/Fahren, Ctrl+Alt+Shift+Z gibt frei",
+   "pt-BR": "Ativado, clique na imagem para começar: o mouse move o analógico direito e as teclas seguem o arquivo de mapeamento; ` alterna a pé/dirigindo, Ctrl+Alt+Shift+Z libera",
+   "ru": "После включения щёлкните по изображению: мышь управляет правым стиком, клавиши — по файлу раскладки; ` переключает «пешком/за рулём», Ctrl+Alt+Shift+Z — освободить"
   },
   {
    "zh": "打开字幕编码器",
@@ -23466,6 +23505,19 @@
    "de": "Konnte das Video nicht öffnen; siehe Diagnose",
    "pt-BR": "Não foi possível abrir o vídeo; veja os diagnósticos",
    "ru": "Не удалось открыть видео; посмотреть диагностику"
+  },
+  {
+   "zh": "无法打开键位文件：%1",
+   "src": "src/ui/bridge/RemotePlay.cpp",
+   "zh-TW": "無法開啟鍵位檔案：%1",
+   "en": "Cannot open the mapping file: %1",
+   "ja": "キー設定ファイルを開けません：%1",
+   "ko": "키 배치 파일을 열 수 없습니다: %1",
+   "es": "No se puede abrir el archivo de asignación: %1",
+   "fr": "Impossible d'ouvrir le fichier d'affectation : %1",
+   "de": "Belegungsdatei kann nicht geöffnet werden: %1",
+   "pt-BR": "Não foi possível abrir o arquivo de mapeamento: %1",
+   "ru": "Не удаётся открыть файл раскладки: %1"
   },
   {
    "zh": "无法打开驱动设置；请先断开采集并关闭占用设备的应用。",
@@ -31357,6 +31409,19 @@
    "de": "Der Encoder gab eine unbekannte Rahmennummer zurück",
    "pt-BR": "O codificador devolveu um número de quadro desconhecido",
    "ru": "Кодер вернул неизвестное число кадра"
+  },
+  {
+   "zh": "编辑键位文件",
+   "src": "qml/CaptureSourceDialog.qml",
+   "zh-TW": "編輯鍵位檔案",
+   "en": "Edit mapping file",
+   "ja": "キー設定ファイルを編集",
+   "ko": "키 배치 파일 편집",
+   "es": "Editar asignación",
+   "fr": "Modifier l'affectation",
+   "de": "Belegung bearbeiten",
+   "pt-BR": "Editar mapeamento",
+   "ru": "Изменить раскладку"
   },
   {
    "zh": "缺少此字幕格式的解码器",
@@ -39809,6 +39874,45 @@
    "ru": "Ошибка 112"
   },
   {
+   "zh": "键位",
+   "src": "qml/CaptureSourceDialog.qml",
+   "zh-TW": "鍵位",
+   "en": "Key mapping",
+   "ja": "キー配置",
+   "ko": "키 배치",
+   "es": "Asignación",
+   "fr": "Affectation",
+   "de": "Tastenbelegung",
+   "pt-BR": "Mapeamento",
+   "ru": "Раскладка"
+  },
+  {
+   "zh": "键位文件无法读取，已使用默认键位",
+   "src": "src/ui/KeyboardMouseCapture.cpp",
+   "zh-TW": "無法讀取鍵位檔案，已使用預設鍵位",
+   "en": "Mapping file unreadable; using the default mapping",
+   "ja": "キー設定ファイルを読めないため、既定の配置を使います",
+   "ko": "키 배치 파일을 읽을 수 없어 기본 배치를 사용합니다",
+   "es": "No se puede leer el archivo de asignación; se usa la predeterminada",
+   "fr": "Fichier d'affectation illisible ; affectation par défaut utilisée",
+   "de": "Belegungsdatei nicht lesbar; Standardbelegung wird verwendet",
+   "pt-BR": "Arquivo de mapeamento ilegível; usando o padrão",
+   "ru": "Файл раскладки не читается; используется раскладка по умолчанию"
+  },
+  {
+   "zh": "键位文件有 %1 处无法识别，已忽略（详见诊断日志）：%2",
+   "src": "src/ui/bridge/RemotePlay.cpp",
+   "zh-TW": "鍵位檔案有 %1 處無法辨識，已忽略（詳見診斷日誌）：%2",
+   "en": "%1 unrecognised entries in the mapping file were ignored (see the diagnostic log): %2",
+   "ja": "キー設定ファイルの認識できない %1 か所を無視しました（診断ログ参照）：%2",
+   "ko": "키 배치 파일에서 인식할 수 없는 %1곳을 무시했습니다(진단 로그 참고): %2",
+   "es": "Se ignoraron %1 entradas no reconocidas del archivo de asignación (ver registro de diagnóstico): %2",
+   "fr": "%1 entrées non reconnues du fichier d'affectation ont été ignorées (voir le journal de diagnostic) : %2",
+   "de": "%1 unbekannte Einträge der Belegungsdatei wurden ignoriert (siehe Diagnoseprotokoll): %2",
+   "pt-BR": "%1 entradas não reconhecidas no arquivo de mapeamento foram ignoradas (veja o log de diagnóstico): %2",
+   "ru": "В файле раскладки пропущено нераспознанных записей: %1 (см. журнал диагностики): %2"
+  },
+  {
    "zh": "键盘鼠标已交给主机 · Ctrl+Alt+Shift+Z 释放 · +Q 断开",
    "src": "qml/StreamHud.qml",
    "zh-TW": "鍵盤滑鼠已交給主機 · Ctrl+Alt+Shift+Z 釋放 · +Q 斷開",
@@ -39822,6 +39926,19 @@
    "ru": "Клавиатура и мышь переданы хосту · Ctrl + Alt + Shift + Z релизы · + Q отключается"
   },
   {
+   "zh": "键盘鼠标控制",
+   "src": "qml/CaptureSourceDialog.qml",
+   "zh-TW": "鍵盤滑鼠控制",
+   "en": "Keyboard & mouse control",
+   "ja": "キーボード・マウス操作",
+   "ko": "키보드·마우스 조작",
+   "es": "Control con teclado y ratón",
+   "fr": "Contrôle clavier et souris",
+   "de": "Tastatur- und Maussteuerung",
+   "pt-BR": "Controle por teclado e mouse",
+   "ru": "Управление клавиатурой и мышью"
+  },
+  {
    "zh": "键盘鼠标未捕获 · 点击画面捕获",
    "src": "qml/StreamHud.qml",
    "zh-TW": "鍵盤滑鼠未擷取 · 點擊畫面擷取",
@@ -39833,6 +39950,84 @@
    "de": "Tastatur und Maus nicht erfasst · Klicken Sie auf das Bild",
    "pt-BR": "Teclado e mouse não capturado · clique na imagem para capturar",
    "ru": "Клавиатура и мышь не захвачены · щелкните картинку для захвата"
+  },
+  {
+   "zh": "键鼠控制中 · 步行键位",
+   "src": "qml/CaptureSourceDialog.qml",
+   "zh-TW": "鍵鼠控制中 · 步行鍵位",
+   "en": "Keyboard & mouse active · on-foot keys",
+   "ja": "キーボード・マウス操作中 · 徒歩配置",
+   "ko": "키보드·마우스 조작 중 · 도보 배치",
+   "es": "Teclado y ratón activos · teclas a pie",
+   "fr": "Clavier et souris actifs · touches à pied",
+   "de": "Tastatur und Maus aktiv · Belegung zu Fuß",
+   "pt-BR": "Teclado e mouse ativos · teclas a pé",
+   "ru": "Клавиатура и мышь активны · раскладка «пешком»"
+  },
+  {
+   "zh": "键鼠控制中 · 驾驶键位",
+   "src": "qml/CaptureSourceDialog.qml",
+   "zh-TW": "鍵鼠控制中 · 駕駛鍵位",
+   "en": "Keyboard & mouse active · driving keys",
+   "ja": "キーボード・マウス操作中 · 運転配置",
+   "ko": "키보드·마우스 조작 중 · 운전 배치",
+   "es": "Teclado y ratón activos · teclas de conducción",
+   "fr": "Clavier et souris actifs · touches de conduite",
+   "de": "Tastatur und Maus aktiv · Belegung Fahren",
+   "pt-BR": "Teclado e mouse ativos · teclas dirigindo",
+   "ru": "Клавиатура и мышь активны · раскладка «за рулём»"
+  },
+  {
+   "zh": "键鼠控制：PS5 手柄控制还没有连接",
+   "src": "src/ui/bridge/RemotePlay.cpp",
+   "zh-TW": "鍵鼠控制：PS5 手把控制尚未連接",
+   "en": "Keyboard & mouse: PS5 controller control is not connected yet",
+   "ja": "キーボード・マウス操作：PS5 コントローラー操作がまだ接続されていません",
+   "ko": "키보드·마우스 조작: PS5 컨트롤러 제어가 아직 연결되지 않았습니다",
+   "es": "Teclado y ratón: el control con mando de PS5 aún no está conectado",
+   "fr": "Clavier et souris : le contrôle par manette PS5 n'est pas encore connecté",
+   "de": "Tastatur und Maus: PS5-Controller-Steuerung ist noch nicht verbunden",
+   "pt-BR": "Teclado e mouse: o controle pelo controle do PS5 ainda não está conectado",
+   "ru": "Клавиатура и мышь: управление с контроллера PS5 ещё не подключено"
+  },
+  {
+   "zh": "键鼠控制：Veyra 窗口不在前台，点击画面重试",
+   "src": "src/ui/bridge/RemotePlay.cpp",
+   "zh-TW": "鍵鼠控制：Veyra 視窗不在前景，點擊畫面重試",
+   "en": "Keyboard & mouse: the Veyra window is not in front; click the picture to retry",
+   "ja": "キーボード・マウス操作：Veyra ウィンドウが前面にありません。画面をクリックして再試行",
+   "ko": "키보드·마우스 조작: Veyra 창이 앞에 있지 않습니다. 화면을 클릭해 다시 시도하세요",
+   "es": "Teclado y ratón: la ventana de Veyra no está en primer plano; haz clic en la imagen para reintentar",
+   "fr": "Clavier et souris : la fenêtre Veyra n'est pas au premier plan ; cliquez sur l'image pour réessayer",
+   "de": "Tastatur und Maus: Das Veyra-Fenster ist nicht im Vordergrund; zum erneuten Versuch auf das Bild klicken",
+   "pt-BR": "Teclado e mouse: a janela do Veyra não está em primeiro plano; clique na imagem para tentar de novo",
+   "ru": "Клавиатура и мышь: окно Veyra не на переднем плане; щёлкните по изображению, чтобы повторить"
+  },
+  {
+   "zh": "键鼠：步行键位",
+   "src": "src/ui/bridge/RemotePlay.cpp",
+   "zh-TW": "鍵鼠：步行鍵位",
+   "en": "Keyboard & mouse: on-foot keys",
+   "ja": "キーボード・マウス：徒歩配置",
+   "ko": "키보드·마우스: 도보 배치",
+   "es": "Teclado y ratón: teclas a pie",
+   "fr": "Clavier et souris : touches à pied",
+   "de": "Tastatur und Maus: Belegung zu Fuß",
+   "pt-BR": "Teclado e mouse: teclas a pé",
+   "ru": "Клавиатура и мышь: раскладка «пешком»"
+  },
+  {
+   "zh": "键鼠：驾驶键位",
+   "src": "src/ui/bridge/RemotePlay.cpp",
+   "zh-TW": "鍵鼠：駕駛鍵位",
+   "en": "Keyboard & mouse: driving keys",
+   "ja": "キーボード・マウス：運転配置",
+   "ko": "키보드·마우스: 운전 배치",
+   "es": "Teclado y ratón: teclas de conducción",
+   "fr": "Clavier et souris : touches de conduite",
+   "de": "Tastatur und Maus: Belegung Fahren",
+   "pt-BR": "Teclado e mouse: teclas dirigindo",
+   "ru": "Клавиатура и мышь: раскладка «за рулём»"
   },
   {
    "zh": "镜像失败时自动改用 GitHub 直连。",
@@ -42773,6 +42968,19 @@
    "ru": "По умолчанию. При включении включенный один NR слой или upscaler готовится, пока домашняя страница простаивает, поэтому первая открыта примерно на 2 с быстрее; после готовности она сохраняет около 0,8-1,8 GB видеопамяти, пока видео не откроется."
   },
   {
+   "zh": "默认参照 GTA 系列 PS 布局；修改后下次点击画面生效",
+   "src": "qml/CaptureSourceDialog.qml",
+   "zh-TW": "預設參照 GTA 系列 PS 配置；修改後下次點擊畫面生效",
+   "en": "Defaults follow the GTA series PS layout; edits apply on the next click on the picture",
+   "ja": "既定は GTA シリーズの PS 配置。変更は次に画面をクリックしたときに反映",
+   "ko": "기본값은 GTA 시리즈 PS 배치이며, 수정 내용은 다음에 화면을 클릭할 때 적용됩니다",
+   "es": "Por defecto sigue el esquema PS de la serie GTA; los cambios se aplican al siguiente clic en la imagen",
+   "fr": "Par défaut, disposition PS de la série GTA ; les modifications s'appliquent au prochain clic sur l'image",
+   "de": "Standard folgt der PS-Belegung der GTA-Reihe; Änderungen gelten beim nächsten Klick auf das Bild",
+   "pt-BR": "O padrão segue o layout PS da série GTA; alterações valem no próximo clique na imagem",
+   "ru": "По умолчанию — раскладка PS серии GTA; изменения применяются при следующем щелчке по изображению"
+  },
+  {
    "zh": "默认只列常用帧率：24、25、30、50、60、100、120、144、165、240（含 59.94 这类非整数帧率）。这张卡另外上报了 %1 个帧率",
    "src": "qml/CaptureSourceDialog.qml",
    "zh-TW": "預設只列常用幀率：24、25、30、50、60、100、120、144、165、240（含 59.94 這類非整數幀率）。這張卡另外回報了 %1 個幀率",
@@ -42862,6 +43070,32 @@
    "de": "Der voreingestellte Bearbeitungsmodus ist ungültig",
    "pt-BR": "O modo de edição predefinido é inválido",
    "ru": "Режим редактирования по умолчанию является недействительным"
+  },
+  {
+   "zh": "鼠标灵敏度",
+   "src": "qml/CaptureSourceDialog.qml",
+   "zh-TW": "滑鼠靈敏度",
+   "en": "Mouse sensitivity",
+   "ja": "マウス感度",
+   "ko": "마우스 감도",
+   "es": "Sensibilidad del ratón",
+   "fr": "Sensibilité de la souris",
+   "de": "Mausempfindlichkeit",
+   "pt-BR": "Sensibilidade do mouse",
+   "ru": "Чувствительность мыши"
+  },
+  {
+   "zh": "鼠标移动速度到右摇杆幅度的比例；反死区、曲线等在键位文件里调",
+   "src": "qml/CaptureSourceDialog.qml",
+   "zh-TW": "滑鼠移動速度對應右搖桿幅度的比例；反死區、曲線等在鍵位檔案裡調整",
+   "en": "How far the right stick goes for a given mouse speed; anti-deadzone, curve and more are in the mapping file",
+   "ja": "マウスの速さに対する右スティックの倒し幅。アンチデッドゾーンやカーブはキー設定ファイルで調整",
+   "ko": "마우스 속도에 대한 오른쪽 스틱 기울기 비율. 안티 데드존, 곡선 등은 키 배치 파일에서 조정",
+   "es": "Cuánto se inclina el stick derecho según la velocidad del ratón; antizona muerta, curva y más en el archivo de asignación",
+   "fr": "Inclinaison du stick droit selon la vitesse de la souris ; anti-zone morte, courbe, etc. dans le fichier d'affectation",
+   "de": "Wie weit der rechte Stick je Mausgeschwindigkeit ausschlägt; Anti-Totzone, Kurve usw. in der Belegungsdatei",
+   "pt-BR": "Quanto o analógico direito inclina para a velocidade do mouse; antizona morta, curva etc. no arquivo de mapeamento",
+   "ru": "Отклонение правого стика в зависимости от скорости мыши; антимёртвая зона, кривая и др. — в файле раскладки"
   },
   {
    "zh": "（MP4，录下处理后的画面和正在播放的声音）",
