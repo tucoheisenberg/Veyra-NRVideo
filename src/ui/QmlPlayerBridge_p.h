@@ -85,6 +85,7 @@
 #pragma comment(lib, "setupapi.lib")
 #pragma comment(lib, "dinput8.lib")
 #include "veyra/remoteplay/ControllerInput.h"
+#include "veyra/ui/KeyboardMouseCapture.h"
 #include "veyra/remoteplay/Discovery.h"
 #include "veyra/remoteplay/ProfileStore.h"
 #include "veyra/source/RemotePlaySource.h"
@@ -502,6 +503,8 @@ struct QmlPlayerBridge::Impl {
     bool ps5ControlNoPair = false;           // switched on without a pairing; cleared once pairings exist
 #ifdef VEYRA_ENABLE_REMOTEPLAY
     remoteplay::ControllerInput controller;
+    // 键鼠控制: keyboard and mouse as the PS5 controller of PS5 手柄控制 (created on first use).
+    std::unique_ptr<ui::KeyboardMouseCapture> kbm;
     // One SDL pad reader shared by PS5 stream, PS5 手柄控制, PC and Xbox streaming.
     // Each user acquires it and only the last release stops it, so the timer of a
     // source that just ended never cuts off the pad the next source started using.
