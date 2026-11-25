@@ -626,6 +626,12 @@ QVariantMap QmlPlayerBridge::ps5Control() const {
 #endif
     out[QStringLiteral("enabled")] = impl_->prefBool("ps5CaptureControl", false);
     out[QStringLiteral("background")] = impl_->prefBool("ps5ControlBackground", false);
+    out[QStringLiteral("kbm")] = impl_->prefBool("ps5Kbm", false);
+    out[QStringLiteral("kbmSensitivity")] = std::clamp(impl_->prefInt("ps5KbmSensitivity", 100), 10, 400);
+#ifdef VEYRA_ENABLE_REMOTEPLAY
+    out[QStringLiteral("kbmCaptured")] = impl_->kbm && impl_->kbm->captured();
+    out[QStringLiteral("kbmDriving")] = impl_->kbm && impl_->kbm->driving();
+#endif
     return out;
 }
 // liveKind is "ps5", "screen", "moonlight" or "xbox" for those sources; a file
@@ -642,13 +648,28 @@ bool QmlPlayerBridge::captureCardLive() const {
 }
 void QmlPlayerBridge::ps5ControlSet(const QString& key, const QVariant& value) {
     static const QHash<QString, QString> keys{{QStringLiteral("enabled"), QStringLiteral("ps5CaptureControl")},
-                                              {QStringLiteral("background"), QStringLiteral("ps5ControlBackground")}};
+                                              {QStringLiteral("background"), QStringLiteral("ps5ControlBackground")},
+                                              {QStringLiteral("kbm"), QStringLiteral("ps5Kbm")},
+                                              {QStringLiteral("kbmSensitivity"), QStringLiteral("ps5KbmSensitivity")}};
     if (!keys.contains(key)) return;
-    const bool on = value.toBool();
     const auto previous = impl_->prefs;
+    if (key == QLatin1String("kbmSensitivity")) {
+        const int percent = std::clamp(value.toInt(), 10, 400);
+        impl_->prefs[keys.value(key)] = percent;
+        if (!impl_->savePrefs()) { impl_->prefs = previous; emit notice(tr("PS5 手柄控制设置保存失败"), true); emit ps5ControlChanged(); return; }
+#ifdef VEYRA_ENABLE_REMOTEPLAY
+        if (impl_->kbm) impl_->kbm->setSensitivityPercent(percent);
+#endif
+        emit ps5ControlChanged();
+        return;
+    }
+    const bool on = value.toBool();
     impl_->prefs[keys.value(key)] = on;
     if (!impl_->savePrefs()) { impl_->prefs = previous; emit notice(tr("PS5 手柄控制设置保存失败"), true); emit ps5ControlChanged(); return; }
     veyra::log::info("remoteplay-control", std::format("ui {}={}", key.toStdString(), on));
+#ifdef VEYRA_ENABLE_REMOTEPLAY
+    if (key == QLatin1String("kbm") && !on && impl_->kbm) impl_->kbm->capture(false);
+#endif
     if (key == QLatin1String("enabled")) {
         impl_->ps5ControlNoPair = false;
         if (!on) stopPs5Control();
@@ -708,10 +729,14 @@ void QmlPlayerBridge::startPs5Control(bool restart) {
             auto& j = *impl_;
             // A PS5 stream polls the pad with its own timer and takes the slot.
             if (j.snapshot.remotePlay || !j.engine.remoteControlRequested()) {
-                j.ps5ControlTimer->stop(); j.releasePad(Impl::PadPs5Control); return;
+                j.ps5ControlTimer->stop(); j.releasePad(Impl::PadPs5Control);
+                if (j.kbm) j.kbm->capture(false);
+                return;
             }
             const bool focused = QGuiApplication::focusWindow() != nullptr || j.prefBool("ps5ControlBackground", false);
-            j.engine.remotePlayController(j.controller.poll(focused));
+            auto state = j.controller.poll(focused);
+            if (j.kbm && j.kbm->captured()) state = j.kbm->merge(state);
+            j.engine.remotePlayController(state);
             j.controller.feedback(j.engine.remotePlayFeedback(), focused);
         });
     }
@@ -721,11 +746,48 @@ void QmlPlayerBridge::startPs5Control(bool restart) {
     (void)restart;
 #endif
 }
+// --- 键鼠控制 (keyboard and mouse as the PS5 controller) ---------------------------
+void QmlPlayerBridge::ps5KbmCapture(bool on) {
+#ifdef VEYRA_ENABLE_REMOTEPLAY
+    auto& i = *impl_;
+    if (!on) { if (i.kbm) i.kbm->capture(false); return; }
+    if (!i.prefBool("ps5Kbm", false)) return;
+    const auto st = i.engine.remoteControlStatus();
+    if (!st.requested || !st.alive || !st.connected) { emit notice(tr("键鼠控制：PS5 手柄控制还没有连接"), true); return; }
+    if (!i.kbm) {
+        i.kbm = std::make_unique<ui::KeyboardMouseCapture>(remoteplay::profileDirectory() / L"kbm-mapping.ini");
+        connect(i.kbm.get(), &ui::KeyboardMouseCapture::capturedChanged, this, [this](bool) { emit ps5ControlChanged(); });
+        connect(i.kbm.get(), &ui::KeyboardMouseCapture::profileChanged, this, [this](bool driving) {
+            emit notice(driving ? tr("键鼠：驾驶键位") : tr("键鼠：步行键位"), false);
+            emit ps5ControlChanged();
+        });
+        connect(i.kbm.get(), &ui::KeyboardMouseCapture::releaseRequested, this, [this] { emit notice(tr("已释放键盘鼠标 · 点击画面重新开始"), false); });
+    }
+    const QStringList problems = i.kbm->loadMapping();
+    if (!problems.isEmpty())
+        emit notice(tr("键位文件有 %1 处无法识别，已忽略（详见诊断日志）：%2").arg(problems.size()).arg(problems.front()), true);
+    i.kbm->setSensitivityPercent(std::clamp(i.prefInt("ps5KbmSensitivity", 100), 10, 400));
+    i.kbm->setWindow(GetAncestor(i.videoWindow, GA_ROOT));
+    if (!i.kbm->capture(true)) { emit notice(tr("键鼠控制：Veyra 窗口不在前台，点击画面重试"), true); return; }
+    emit notice((i.kbm->driving() ? tr("键鼠控制中 · 驾驶键位") : tr("键鼠控制中 · 步行键位")) + tr(" · Ctrl+Alt+Shift+Z 释放"), false);
+#else
+    (void)on;
+#endif
+}
+void QmlPlayerBridge::ps5KbmOpenMapping() {
+#ifdef VEYRA_ENABLE_REMOTEPLAY
+    const auto path = remoteplay::profileDirectory() / L"kbm-mapping.ini";
+    const QString shown = QString::fromStdWString(path.wstring());
+    if (!ui::KeyboardMouseCapture::writeDefaultMapping(path) || !QDesktopServices::openUrl(QUrl::fromLocalFile(shown)))
+        emit notice(tr("无法打开键位文件：%1").arg(shown), true);
+#endif
+}
 void QmlPlayerBridge::stopPs5Control() {
 #ifdef VEYRA_ENABLE_REMOTEPLAY
     auto& i = *impl_;
     if (!i.engine.remoteControlRequested()) return;
     veyra::log::info("remoteplay-control", "stop");
+    if (i.kbm) i.kbm->capture(false);
     i.engine.stopRemoteControl();
     i.ps5ControlProfile.clear();
     tickPs5Control(true);
@@ -752,6 +814,11 @@ void QmlPlayerBridge::tickPs5Control(bool force) {
     }
     // Tests only: show a state no console is available to produce here.
     if (const QString forced = qEnvironmentVariable("VEYRA_TEST_PS5_CONTROL_STATE"); !forced.isEmpty() && st.requested) state = forced;
+    // 键鼠控制 needs a live session: give the keyboard, mouse and cursor back when it drops.
+    if (i.kbm && i.kbm->captured() && state != QLatin1String("connected")) {
+        i.kbm->capture(false);
+        emit notice(tr("已释放键盘鼠标 · 点击画面重新开始"), false);
+    }
     QVariantMap next;
     next[QStringLiteral("state")] = state;
     next[QStringLiteral("message")] = state == QLatin1String("nopair") ? tr("还没有配对的 PS5，先在「PS5 串流」里配对一次") : uiText(st.message);
