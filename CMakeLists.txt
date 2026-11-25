@@ -2027,7 +2027,9 @@ target_link_options(veyra_hdr_tuning_tests PRIVATE /STACK:33554432)
     # Qt paths under E:/项目. Those system libraries come from #pragma comment in
     # the private QmlPlayerBridge_p.h instead.
     if(TARGET veyra_qml_bridge)
-      target_sources(veyra_qml_bridge PRIVATE src/remoteplay/ControllerInput.cpp)
+      target_sources(veyra_qml_bridge PRIVATE src/remoteplay/ControllerInput.cpp
+        src/remoteplay/KeyboardMouseMapper.cpp include/veyra/remoteplay/KeyboardMouseMapper.h
+        src/ui/KeyboardMouseCapture.cpp include/veyra/ui/KeyboardMouseCapture.h)
       target_link_libraries(veyra_qml_bridge PUBLIC $<TARGET_LINKER_FILE:SDL3::SDL3-static>)
       target_link_libraries(veyra_qml_bridge PRIVATE SDL3::Headers)
     endif()
@@ -2040,6 +2042,10 @@ target_link_options(veyra_hdr_tuning_tests PRIVATE /STACK:33554432)
     add_executable(veyra_remoteplay_boundary_tests tests/remoteplay/ProductBoundaryTests.cpp src/remoteplay/ControllerInput.cpp)
     target_compile_features(veyra_remoteplay_boundary_tests PRIVATE cxx_std_20)
     target_link_libraries(veyra_remoteplay_boundary_tests PRIVATE veyra_sources SDL3::SDL3)
+    add_executable(veyra_remoteplay_kbm_tests tests/remoteplay/KeyboardMouseMapperTests.cpp src/remoteplay/KeyboardMouseMapper.cpp)
+    target_compile_features(veyra_remoteplay_kbm_tests PRIVATE cxx_std_20)
+    target_compile_options(veyra_remoteplay_kbm_tests PRIVATE /utf-8)
+    target_include_directories(veyra_remoteplay_kbm_tests PRIVATE include)
     add_executable(veyra_remoteplay_trigger_filter_tests tests/remoteplay/TriggerFilterTests.cpp)
     target_compile_features(veyra_remoteplay_trigger_filter_tests PRIVATE cxx_std_20)
     target_include_directories(veyra_remoteplay_trigger_filter_tests PRIVATE include)
